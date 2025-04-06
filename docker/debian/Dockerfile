@@ -1,19 +1,18 @@
-FROM debian:buster
-MAINTAINER Rob Gil (rob@rem5.com)
+FROM debian:bookworm
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 
 RUN apt-get update && \
     apt-get install -y libpcre3-dev apt-transport-https ca-certificates curl wget logrotate \
-    libc-ares2 libjson-c3 vim procps libreadline7 gnupg2 lsb-release apt-utils \
+    libc-ares2 libjson-c5 vim procps libreadline-dev gnupg2 lsb-release apt-utils \
     libprotobuf-c-dev protobuf-c-compiler tini && rm -rf /var/lib/apt/lists/*
 
 RUN curl -s https://deb.frrouting.org/frr/keys.asc | apt-key add -
 RUN echo deb https://deb.frrouting.org/frr $(lsb_release -s -c) frr-stable | tee -a /etc/apt/sources.list.d/frr.list
 
 RUN apt-get update && \
-    apt-get install -y frr frr-pythontools && \
+    apt-get install -y --no-install-recommends frr frr-pythontools wireguard-tools && \
     rm -rf /var/lib/apt/lists/*
 
 # Own the config / PID files
