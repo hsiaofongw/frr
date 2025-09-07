@@ -23,7 +23,7 @@ makedepends="ncurses-dev net-snmp-dev gawk texinfo perl
 	protobuf-c libprotobuf grpc-cpp grpc-dev libgrpc"
 checkdepends="pytest py-setuptools"
 install="$pkgname.pre-install $pkgname.pre-deinstall $pkgname.post-deinstall"
-subpackages="$pkgname-dev $pkgname-doc $pkgname-dbg"
+subpackages="$pkgname-dev $pkgname-dbg"
 source="$pkgname-$pkgver.tar.gz"
 
 builddir="$srcdir"/$pkgname-$pkgver
