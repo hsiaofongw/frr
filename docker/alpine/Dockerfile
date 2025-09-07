@@ -42,7 +42,14 @@ RUN cd /src \
 		--enable-multipath=256 \
 		--enable-numeric-version \
 		--with-pkg-extra-version="_git$PKGVER" \
+		--enable-scripting \
+		--enable-grpc \
+		--enable-config-rollbacks \
+		--enable-snmp \
+		--disable-doc \
 	&& make dist
+
+# --enable-sysrepo \
 
 # This stage builds an APK from the dist tarball
 FROM alpine-builder as alpine-apk-builder
